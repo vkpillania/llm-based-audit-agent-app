@@ -1,0 +1,48 @@
+services:
+  # invoicedb:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_USER: auditadmin
+  #     POSTGRES_PASSWORD: auditadmin
+  #     POSTGRES_DB: audit_agents
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - audit_agent_data:/var/lib/postgresql/data
+  #     # - ./init-scripts:/docker-entrypoint-initdb.d:ro
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U auditadmin -d audit_agents"]
+  #     interval: 5s
+  #     retries: 5
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      OCR_MODEL: "gpt-4o-mini"
+      AUDIT_MODEL: "gpt-4o-mini"
+      
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/v1/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      invoicedb:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8501:8501"
+    environment:
+      API_BASE_URL: http://backend:8000
+      # API_BASE_URL: http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  audit_agent_data:
