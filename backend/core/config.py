@@ -14,8 +14,8 @@ class Settings:
         self.DATABASE_NAME = db_creds["DB_NAME"] 
         self.DATABASE_USER = db_creds["DB_USER"]
         self.DATABASE_PASSWORD = db_creds["DB_PASS"]
-        # self.DATABASE_HOST = 'database-1.cd2q86w4mjdh.ap-south-1.rds.amazonaws.com'
-        self.DATABASE_HOST = 'localhost'
+        self.DATABASE_HOST = 'database-1.cd2q86w4mjdh.ap-south-1.rds.amazonaws.com'
+        # self.DATABASE_HOST = 'localhost'
         self.DATABASE_PORT = 5432
         self.DATABASE_URL = f"postgresql://{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@{self.DATABASE_HOST}:{self.DATABASE_PORT}/{self.DATABASE_NAME}"
         if not self.DATABASE_URL:

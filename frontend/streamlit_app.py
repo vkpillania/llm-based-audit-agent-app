@@ -30,8 +30,8 @@ import streamlit as st
 # --------------------------------------------------------------------------- #
 st.set_page_config(page_title="Audit Agent", page_icon="🧾", layout="wide")
 
-DEFAULT_API = os.getenv("API_BASE_URL", "http://127.0.0.1:8000")
-# DEFAULT_API = os.getenv("API_BASE_URL", "http://backend:8000")
+# DEFAULT_API = os.getenv("API_BASE_URL", "http://127.0.0.1:8000")
+DEFAULT_API = os.getenv("API_BASE_URL", "http://backend:8000")
 
 # A little colour for verdicts/severities.
 st.markdown(
