@@ -22,7 +22,7 @@ class Settings:
         if not self.DATABASE_URL:
             raise RuntimeError("DATABASE_URL not configured")
         
-        OPENAI_API_KEY = get_secret("open-api-key", "ap-south-1")
+        OPENAI_API_KEY = get_secret("open-api-key-vips", "ap-south-1")
         OPENAI_API_KEY = json.loads(OPENAI_API_KEY)
         self.OPENAI_API_KEY = OPENAI_API_KEY["openai-api-key"]
 
