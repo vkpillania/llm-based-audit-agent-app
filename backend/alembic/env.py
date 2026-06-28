@@ -22,10 +22,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from database.base import Base
 from models.invoice import Invoice  # import all models so they register with Base
+from core.config import settings
 
 target_metadata = Base.metadata
 
-db_url = os.environ.get("DATABASE_URL")
+# db_url = os.environ.get("DATABASE_URL")
+db_url = settings.DATABASE_URL
 if db_url:
     config.set_main_option("sqlalchemy.url", db_url)
 
